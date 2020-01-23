@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Apple Music Animation</string>
+    <string name="middle_text">The scenarios we envision for MotionLayout are when you need to move, resize or animate the actual UI elements — buttons, title bar, etc. — elements that the user needs to interact with.</string>
+    <string name="end_text">It’s important to realize that motion is here to serve a purpose — it should not be simply a gratuitous special effect in your application; it should be used to help the user understand what your application is doing. The Material Design principles website is a great introduction to those concepts.</string>
+    <string name="name_of_song">Name of song</string>
 </resources>
