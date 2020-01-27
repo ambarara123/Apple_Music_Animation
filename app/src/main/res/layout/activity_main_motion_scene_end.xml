@@ -56,7 +56,6 @@
         android:id="@+id/previousButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-
         android:src="@drawable/ic_skip_previous_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/topLayout"
         app:layout_constraintEnd_toStartOf="@+id/pauseButton"
@@ -85,9 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageview" />
-
-
-
 
     <LinearLayout
         android:id="@+id/bottomLayout"
