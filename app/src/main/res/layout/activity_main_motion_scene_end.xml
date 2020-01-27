@@ -5,15 +5,17 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#443939"
+
     tools:context=".ui.main.MainActivity">
 
 
     <LinearLayout
         android:id="@+id/topLayout"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#443939"
         android:orientation="vertical"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="56dp"
         app:layout_constraintBottom_toTopOf="@+id/pauseButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,15 +43,19 @@
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/topLayout"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
+        app:layout_constraintStart_toEndOf="@+id/previousButton"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout"
         app:srcCompat="@drawable/ic_pause_black_24dp" />
 
     <ImageButton
         android:id="@+id/nextButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/topLayout"
-        app:layout_constraintEnd_toEndOf="@+id/imageview"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout"
         app:srcCompat="@drawable/ic_skip_next_black_24dp" />
 
 
@@ -56,11 +63,12 @@
         android:id="@+id/previousButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:background="@null"
         android:src="@drawable/ic_skip_previous_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/topLayout"
-        app:layout_constraintEnd_toStartOf="@+id/pauseButton"
-        android:background="@null"
-        app:layout_constraintStart_toStartOf="@+id/imageview" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout" />
 
     <ImageView
         android:id="@+id/imageview"
@@ -88,18 +96,13 @@
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/end_text"
-            android:textSize="24sp" />
 
     </LinearLayout>
 

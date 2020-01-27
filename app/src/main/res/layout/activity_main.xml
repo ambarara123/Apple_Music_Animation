@@ -12,19 +12,113 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_main_scene"
+        android:background="#3F51B5"
         tools:context=".ui.main.MainActivity">
 
 
         <LinearLayout
             android:id="@+id/topLayout"
-            android:layout_width="411dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#443939"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:id="@+id/first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:padding="16dp">
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@mipmap/ic_launcher"-->
+<!--                    android:id="@+id/thumbnailImageView"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/first_song"
+                    android:textColor="#fff"
+                    android:textSize="26sp"
+                    android:layout_margin="8dp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#fff"
+                />
+            <LinearLayout
+                android:id="@+id/second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:padding="16dp">
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@mipmap/ic_launcher"-->
+                <!--                    android:id="@+id/thumbnailImageView"-->
+                <!--                    android:layout_margin="8dp"-->
+                <!--                    />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="second song"
+                    android:textColor="#fff"
+                    android:textSize="26sp"
+                    android:layout_margin="8dp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#fff"
+                />
+            <LinearLayout
+                android:id="@+id/third"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:padding="16dp">
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@mipmap/ic_launcher"-->
+                <!--                    android:id="@+id/thumbnailImageView"-->
+                <!--                    android:layout_margin="8dp"-->
+                <!--                    />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="third song"
+                    android:textColor="#fff"
+                    android:textSize="26sp"
+                    android:layout_margin="8dp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#fff"
+                />
+        </LinearLayout>
 
 
         <ImageButton
@@ -99,18 +193,12 @@
         <LinearLayout
             android:id="@+id/bottomLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/end_text"
-                android:textSize="24sp" />
 
         </LinearLayout>
 
