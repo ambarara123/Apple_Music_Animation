@@ -1,4 +1,4 @@
-package com.example.applemusicanimation.ui
+package com.example.applemusicanimation.ui.main
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

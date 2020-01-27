@@ -3,7 +3,7 @@ package com.example.applemusicanimation.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.applemusicanimation.di.keys.ViewModelKey
-import com.example.applemusicanimation.ui.MainViewModel
+import com.example.applemusicanimation.ui.main.MainViewModel
 import com.example.applemusicanimation.utils.ViewModelFactory
 import dagger.Binds
 import dagger.Module
