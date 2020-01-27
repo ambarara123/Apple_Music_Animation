@@ -26,6 +26,10 @@ android {
     dataBinding{
         enabled true
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -56,4 +60,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    //exoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.1'
 }

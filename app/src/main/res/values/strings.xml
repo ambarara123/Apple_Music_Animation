@@ -4,4 +4,5 @@
     <string name="end_text">It’s important to realize that motion is here to serve a purpose — it should not be simply a gratuitous special effect in your application; it should be used to help the user understand what your application is doing. The Material Design principles website is a great introduction to those concepts.</string>
     <string name="name_of_song">Name of song</string>
     <string name="first_song">first song</string>
+    <string name="song_url">https://storage.googleapis.com/exoplayer-test-media-0/play.mp3</string>
 </resources>
