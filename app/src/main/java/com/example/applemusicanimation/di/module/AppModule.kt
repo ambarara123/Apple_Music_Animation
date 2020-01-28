@@ -33,7 +33,6 @@ class AppModule {
         return DefaultDataSourceFactory(context, "exoplayer")
     }
 
-    @Singleton
     @Provides
     fun provideMediaSource(
         dataSourceFactory: DataSource.Factory

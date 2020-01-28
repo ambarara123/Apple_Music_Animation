@@ -21,19 +21,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         addObservers()
     }
 
-    private fun addObservers(){
-        viewModel.playWhenReady.observe(this, Observer {isPlaying->
-            binding.pauseButton.setOnClickListener {
-                viewModel.playPauseToggle(isPlaying)
-            }
+    private fun addObservers() {
+        var isPlaying = false
+        viewModel.playWhenReady.observe(this, Observer {
+            isPlaying = it
         })
+        binding.pauseButton.setOnClickListener {
+            viewModel.playPauseToggle(!isPlaying)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onClickListener() {
         with(binding) {
             first.setOnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_UP){
+                if (event.action == MotionEvent.ACTION_UP) {
                     viewModel.initialisePlayer(0)
                     Timber.d("clicked")
                 }

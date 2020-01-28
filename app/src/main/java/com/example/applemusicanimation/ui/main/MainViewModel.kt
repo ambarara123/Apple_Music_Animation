@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun playPauseToggle(isPlaying: Boolean) {
-        _playWhenReady.value = isPlaying
+        _playWhenReady.postValue(isPlaying)
         player.playWhenReady = isPlaying
     }
 
