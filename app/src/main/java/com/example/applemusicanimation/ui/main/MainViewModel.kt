@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
         val mediaSource = progressiveMediaSource
             .createMediaSource(uri)
         player.playWhenReady = true
-        player.prepare(mediaSource, false, false)
+        player.prepare(mediaSource, true, false)
     }
 
     fun playPauseToggle(isPlaying: Boolean) {

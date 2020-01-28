@@ -1,9 +1,7 @@
 package com.example.applemusicanimation.di.module
 
 import android.content.Context
-import android.net.Uri
 import com.example.applemusicanimation.MyApplication
-import com.example.applemusicanimation.utils.uris
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
