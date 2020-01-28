@@ -3,10 +3,9 @@ package com.example.applemusicanimation.di.module
 import android.content.Context
 import android.net.Uri
 import com.example.applemusicanimation.MyApplication
-import com.example.applemusicanimation.R
+import com.example.applemusicanimation.utils.uris
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -36,14 +35,9 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideUri(context: Context): Uri {
-        return Uri.parse(context.getString(R.string.song_url))
-    }
-
-    @Singleton
-    @Provides
-    fun provideMediaSource(uri: Uri, dataSourceFactory: DataSource.Factory): MediaSource {
+    fun provideMediaSource(
+        dataSourceFactory: DataSource.Factory
+    ): ProgressiveMediaSource.Factory {
         return ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(uri)
     }
 }

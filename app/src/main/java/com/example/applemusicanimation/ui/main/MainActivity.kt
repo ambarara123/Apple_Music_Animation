@@ -34,12 +34,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         with(binding) {
             first.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_UP){
-                    viewModel.initialisePlayer()
+                    viewModel.initialisePlayer(0)
                     Timber.d("clicked")
                 }
                 return@setOnTouchListener false
             }
-
+            nextButton.setOnClickListener { viewModel.nextSong() }
+            previousButton.setOnClickListener { viewModel.previousSong() }
         }
     }
 }
