@@ -1,6 +1,7 @@
 package com.example.applemusicanimation.ui.main
 
 import android.net.Uri
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,5 +47,19 @@ class MainViewModel @Inject constructor(
 
         initialisePlayer(songNumber)
     }
+
+    private fun startCountDownTimer(interval: Long){
+        object : CountDownTimer(interval,1000){
+
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                player.stop(true)
+            }
+
+        }.start()
+    }
+
 
 }

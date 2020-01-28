@@ -2,6 +2,7 @@ package com.example.applemusicanimation.ui.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.MotionEvent
 import androidx.lifecycle.Observer
 import com.example.applemusicanimation.R
@@ -43,6 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             nextButton.setOnClickListener { viewModel.nextSong() }
             previousButton.setOnClickListener { viewModel.previousSong() }
+            sleepButton.setOnClickListener {  }
         }
     }
 }
