@@ -27,14 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         viewModel.playWhenReady.observe(this, Observer {
             isPlaying = it
         })
-        playPauseListener(isPlaying)
-        setSleepToggle()
-    }
-
-    private fun playPauseListener(isPlaying: Boolean) {
         binding.pauseButton.setOnClickListener {
             viewModel.playPauseToggle(!isPlaying)
         }
+        setSleepToggle()
     }
 
     @SuppressLint("ClickableViewAccessibility")

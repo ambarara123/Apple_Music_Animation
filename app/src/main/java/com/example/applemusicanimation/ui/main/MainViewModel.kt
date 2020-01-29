@@ -63,6 +63,7 @@ class MainViewModel @Inject constructor(
     fun playPauseToggle(isPlaying: Boolean) {
         _playWhenReady.postValue(isPlaying)
         player.playWhenReady = isPlaying
+        player.playbackState
     }
 
     fun nextSong() {
@@ -102,6 +103,7 @@ class MainViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
+        handler?.removeCallbacks(runnable!!)
         if (countDownTimer != null) {
             countDownTimer?.cancel()
         }
