@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#443939"
-
     tools:context=".ui.main.MainActivity">
 
 
@@ -95,10 +94,9 @@
 
     <ImageButton
         android:id="@+id/sleepButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="@null"
-        android:src="@drawable/ic_timer_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
@@ -113,9 +111,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topLayout">
-
-
-
 
     </LinearLayout>
 

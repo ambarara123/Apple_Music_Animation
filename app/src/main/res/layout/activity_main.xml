@@ -122,12 +122,11 @@
 
         <ImageButton
             android:id="@+id/sleepButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="50dp"
             android:background="@null"
             android:visibility="gone"
-            android:src="@drawable/ic_timer_black_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/topLayout"
             app:layout_constraintStart_toStartOf="@+id/seekBar"
             app:layout_constraintTop_toBottomOf="@+id/topLayout" />

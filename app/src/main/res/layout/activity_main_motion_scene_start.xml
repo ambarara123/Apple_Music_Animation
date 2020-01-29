@@ -52,6 +52,16 @@
         app:layout_constraintStart_toEndOf="@+id/pauseButton"
         app:layout_constraintTop_toTopOf="@+id/pauseButton"
         app:srcCompat="@drawable/ic_skip_next_black_24dp" />
+    <ImageButton
+        android:id="@+id/sleepButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@null"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nextButton"
+        app:layout_constraintTop_toTopOf="@+id/nextButton" />
 
     <ImageButton
         android:id="@+id/previousButton"

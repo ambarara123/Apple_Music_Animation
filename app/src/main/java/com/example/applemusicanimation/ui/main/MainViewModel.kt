@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.applemusicanimation.utils.uris
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -18,9 +19,19 @@ class MainViewModel @Inject constructor(
     val playWhenReady: LiveData<Boolean>
         get() = _playWhenReady
 
+    private val _isSleepMode = MutableLiveData<Boolean>()
+    val isSleepMode: LiveData<Boolean>
+        get() = _isSleepMode
+
+    private var countDownTimer : CountDownTimer? = null
+
     private var songNumber = 0
 
-    fun initialisePlayer(songNumber: Int) {
+    init {
+        _isSleepMode.value = false
+    }
+
+    fun setupPlayer(songNumber: Int) {
         this.songNumber = songNumber
         val uri = Uri.parse(uris[songNumber])
         val mediaSource = progressiveMediaSource
@@ -38,28 +49,44 @@ class MainViewModel @Inject constructor(
         if (songNumber == 2) songNumber = 0
         else songNumber++
 
-        initialisePlayer(songNumber)
+        setupPlayer(songNumber)
     }
 
     fun previousSong() {
         if (songNumber == 0) songNumber = 2
         else songNumber--
 
-        initialisePlayer(songNumber)
+        setupPlayer(songNumber)
     }
 
-    private fun startCountDownTimer(interval: Long){
-        object : CountDownTimer(interval,1000){
+    fun startCountDownTimer(interval: Long) {
+        _isSleepMode.value = true
+        countDownTimer = object : CountDownTimer(interval, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
+                Timber.d("$millisUntilFinished")
             }
 
             override fun onFinish() {
+                _isSleepMode.value = false
                 player.stop(true)
             }
 
         }.start()
     }
 
+    fun stopCountDownTimer(){
+        _isSleepMode.value = false
+        countDownTimer?.cancel()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        if (countDownTimer!=null){
+            countDownTimer?.cancel()
+        }
+        player.stop()
+        player.release()
+    }
 
 }
