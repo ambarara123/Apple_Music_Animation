@@ -19,6 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         super.onCreate(savedInstanceState)
         onClickListener()
         addObservers()
+        setUpSeekBar()
     }
 
     private fun addObservers() {
@@ -26,10 +27,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         viewModel.playWhenReady.observe(this, Observer {
             isPlaying = it
         })
+        playPauseListener(isPlaying)
+        setSleepToggle()
+    }
+
+    private fun playPauseListener(isPlaying: Boolean) {
         binding.pauseButton.setOnClickListener {
             viewModel.playPauseToggle(!isPlaying)
         }
-        setSleepToggle()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -69,9 +74,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun sleepListener(isSleepMode: Boolean) {
         binding.sleepButton.setOnClickListener {
             if (!isSleepMode)
-                viewModel.startCountDownTimer(3000)
+                viewModel.startCountDownTimer(30000)
             else
                 viewModel.stopCountDownTimer()
         }
+    }
+
+    private fun setUpSeekBar() {
+        viewModel.getCurrentPosition.observe(this, Observer {
+            binding.seekBar.setProgress((it.first / it.second).toInt(), true)
+        })
     }
 }

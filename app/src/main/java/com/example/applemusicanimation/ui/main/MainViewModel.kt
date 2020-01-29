@@ -2,6 +2,7 @@ package com.example.applemusicanimation.ui.main
 
 import android.net.Uri
 import android.os.CountDownTimer
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,12 +24,30 @@ class MainViewModel @Inject constructor(
     val isSleepMode: LiveData<Boolean>
         get() = _isSleepMode
 
-    private var countDownTimer : CountDownTimer? = null
+    private val _getCurrentPosition = MutableLiveData<Pair<Long, Long>>()
+    val getCurrentPosition: LiveData<Pair<Long, Long>>
+        get() = _getCurrentPosition
+
+    private var countDownTimer: CountDownTimer? = null
 
     private var songNumber = 0
 
+    private var handler: Handler? = null
+    private var runnable: Runnable? = null
+
     init {
         _isSleepMode.value = false
+    }
+
+    private fun setupSeekBar() {
+        handler = Handler()
+        runnable = Runnable {
+            val currentPosition = player.currentPosition*100
+            val duration = player.duration
+            _getCurrentPosition.postValue(Pair(currentPosition, duration))
+            handler?.postDelayed(runnable!!, 1000)
+        }
+        handler?.postDelayed(runnable!!, 0)
     }
 
     fun setupPlayer(songNumber: Int) {
@@ -38,6 +57,7 @@ class MainViewModel @Inject constructor(
             .createMediaSource(uri)
         player.playWhenReady = true
         player.prepare(mediaSource, true, false)
+        setupSeekBar()
     }
 
     fun playPauseToggle(isPlaying: Boolean) {
@@ -64,7 +84,7 @@ class MainViewModel @Inject constructor(
         countDownTimer = object : CountDownTimer(interval, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                Timber.d("$millisUntilFinished")
+                Timber.d("${player.currentPosition} / ${player.duration}")
             }
 
             override fun onFinish() {
@@ -75,14 +95,14 @@ class MainViewModel @Inject constructor(
         }.start()
     }
 
-    fun stopCountDownTimer(){
+    fun stopCountDownTimer() {
         _isSleepMode.value = false
         countDownTimer?.cancel()
     }
 
     override fun onCleared() {
         super.onCleared()
-        if (countDownTimer!=null){
+        if (countDownTimer != null) {
             countDownTimer?.cancel()
         }
         player.stop()
