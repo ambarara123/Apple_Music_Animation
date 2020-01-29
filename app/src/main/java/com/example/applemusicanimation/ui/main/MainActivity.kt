@@ -3,13 +3,16 @@ package com.example.applemusicanimation.ui.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.SeekBar
 import androidx.lifecycle.Observer
 import com.example.applemusicanimation.R
 import com.example.applemusicanimation.databinding.ActivityMainBinding
 import com.example.applemusicanimation.ui.base.BaseActivity
 import timber.log.Timber
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
+    SeekBar.OnSeekBarChangeListener {
+
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -23,18 +26,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun addObservers() {
-        var isPlaying = false
-        viewModel.playWhenReady.observe(this, Observer {
-            isPlaying = it
-        })
-        binding.pauseButton.setOnClickListener {
-            viewModel.playPauseToggle(!isPlaying)
-        }
+
         setSleepToggle()
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onClickListener() {
+
         with(binding) {
             first.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
@@ -44,7 +42,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 return@setOnTouchListener false
             }
             nextButton.setOnClickListener { viewModel.nextSong() }
+
             previousButton.setOnClickListener { viewModel.previousSong() }
+
+            seekBar.setOnSeekBarChangeListener(this@MainActivity)
+
+            binding.pauseButton.setOnClickListener { viewModel.playPauseToggle() }
         }
     }
 
@@ -80,5 +83,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         viewModel.getCurrentPosition.observe(this, Observer {
             binding.seekBar.setProgress((it.first / it.second).toInt(), true)
         })
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
     }
 }

@@ -16,9 +16,6 @@ class MainViewModel @Inject constructor(
     private val player: SimpleExoPlayer,
     private val progressiveMediaSource: ProgressiveMediaSource.Factory
 ) : ViewModel() {
-    private val _playWhenReady = MutableLiveData<Boolean>()
-    val playWhenReady: LiveData<Boolean>
-        get() = _playWhenReady
 
     private val _isSleepMode = MutableLiveData<Boolean>()
     val isSleepMode: LiveData<Boolean>
@@ -42,7 +39,7 @@ class MainViewModel @Inject constructor(
     private fun setupSeekBar() {
         handler = Handler()
         runnable = Runnable {
-            val currentPosition = player.currentPosition*100
+            val currentPosition = player.currentPosition * 100
             val duration = player.duration
             _getCurrentPosition.postValue(Pair(currentPosition, duration))
             handler?.postDelayed(runnable!!, 1000)
@@ -60,10 +57,8 @@ class MainViewModel @Inject constructor(
         setupSeekBar()
     }
 
-    fun playPauseToggle(isPlaying: Boolean) {
-        _playWhenReady.postValue(isPlaying)
-        player.playWhenReady = isPlaying
-        player.playbackState
+    fun playPauseToggle() {
+        player.playWhenReady = !player.playWhenReady
     }
 
     fun nextSong() {
