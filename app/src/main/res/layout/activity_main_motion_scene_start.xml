@@ -23,7 +23,7 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/pauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageview"
         app:srcCompat="@drawable/ic_pause_black_24dp" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/topLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,8 +52,18 @@
         app:layout_constraintStart_toEndOf="@+id/pauseButton"
         app:layout_constraintTop_toTopOf="@+id/pauseButton"
         app:srcCompat="@drawable/ic_skip_next_black_24dp" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/sleepButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@null"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nextButton"
+        app:layout_constraintTop_toTopOf="@+id/nextButton" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

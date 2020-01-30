@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class BaseActivity<B: ViewDataBinding,VM: ViewModel> : DaggerAppCompatActivity(){
+abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : DaggerAppCompatActivity() {
     lateinit var viewModel: VM
     lateinit var binding: B
 
@@ -21,9 +21,9 @@ abstract class BaseActivity<B: ViewDataBinding,VM: ViewModel> : DaggerAppCompatA
         bindView()
     }
 
-    private fun bindView(){
-        binding = DataBindingUtil.setContentView(this,getLayoutId())
-        viewModel = ViewModelProvider(this,viewModelFactory).get(getViewModelClass())
+    private fun bindView() {
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(getViewModelClass())
     }
 
     @LayoutRes
