@@ -3,15 +3,14 @@ package com.example.applemusicanimation.ui.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
-import android.widget.SeekBar
+import android.widget.ImageButton
 import androidx.lifecycle.Observer
 import com.example.applemusicanimation.R
 import com.example.applemusicanimation.databinding.ActivityMainBinding
 import com.example.applemusicanimation.ui.base.BaseActivity
 import timber.log.Timber
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
-    SeekBar.OnSeekBarChangeListener {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
     override fun getLayoutId(): Int = R.layout.activity_main
@@ -22,12 +21,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         super.onCreate(savedInstanceState)
         onClickListener()
         addObservers()
-        setUpSeekBar()
     }
 
     private fun addObservers() {
+        viewModel.isSleepMode.observe(this, Observer {
+            binding.sleepButton.setBackgroundResForSleepMode(it)
+        })
 
-        setSleepToggle()
+        viewModel.currentVsTotalPairLiveData.observe(this, Observer {
+            binding.seekBar.setProgress((it.first / it.second).toInt(), true)
+        })
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -45,55 +48,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
             previousButton.setOnClickListener { viewModel.previousSong() }
 
-            seekBar.setOnSeekBarChangeListener(this@MainActivity)
+            pauseButton.setOnClickListener { viewModel.playPauseToggle() }
 
-            binding.pauseButton.setOnClickListener { viewModel.playPauseToggle() }
+            sleepButton.setOnClickListener { viewModel.toggleSleepMode() }
         }
     }
 
-    private fun setSleepToggle() {
-        var isSleepMode = false
-
-        viewModel.isSleepMode.observe(this, Observer {
-            with(binding.sleepButton) {
-                isSleepMode = it
-                if (it)
-                    setBackgroundResource(
-                        R.drawable.ic_timer_off_black_24dp
-                    )
-                else
-                    setBackgroundResource(
-                        R.drawable.ic_timer_black_24dp
-                    )
-            }
-        })
-        sleepListener(isSleepMode)
-    }
-
-    private fun sleepListener(isSleepMode: Boolean) {
-        binding.sleepButton.setOnClickListener {
-            if (!isSleepMode)
-                viewModel.startCountDownTimer(30000)
-            else
-                viewModel.stopCountDownTimer()
-        }
-    }
-
-    private fun setUpSeekBar() {
-        viewModel.getCurrentPosition.observe(this, Observer {
-            binding.seekBar.setProgress((it.first / it.second).toInt(), true)
-        })
-    }
-
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-
-    }
-
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-    }
-
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
+    private fun ImageButton.setBackgroundResForSleepMode(isSleepMode: Boolean) {
+        if (isSleepMode)
+            setBackgroundResource(
+                R.drawable.ic_timer_off_black_24dp
+            )
+        else
+            setBackgroundResource(
+                R.drawable.ic_timer_black_24dp
+            )
     }
 }

@@ -14,16 +14,16 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val player: SimpleExoPlayer,
-    private val progressiveMediaSource: ProgressiveMediaSource.Factory
+    private val progressiveMediaSourceFactory: ProgressiveMediaSource.Factory
 ) : ViewModel() {
 
     private val _isSleepMode = MutableLiveData<Boolean>()
     val isSleepMode: LiveData<Boolean>
         get() = _isSleepMode
 
-    private val _getCurrentPosition = MutableLiveData<Pair<Long, Long>>()
-    val getCurrentPosition: LiveData<Pair<Long, Long>>
-        get() = _getCurrentPosition
+    private val _currentVsTotalPairLiveData = MutableLiveData<Pair<Long, Long>>()
+    val currentVsTotalPairLiveData: LiveData<Pair<Long, Long>>
+        get() = _currentVsTotalPairLiveData
 
     private var countDownTimer: CountDownTimer? = null
 
@@ -41,7 +41,7 @@ class MainViewModel @Inject constructor(
         runnable = Runnable {
             val currentPosition = player.currentPosition * 100
             val duration = player.duration
-            _getCurrentPosition.postValue(Pair(currentPosition, duration))
+            _currentVsTotalPairLiveData.postValue(Pair(currentPosition, duration))
             handler?.postDelayed(runnable!!, 1000)
         }
         handler?.postDelayed(runnable!!, 0)
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
     fun setupPlayer(songNumber: Int) {
         this.songNumber = songNumber
         val uri = Uri.parse(uris[songNumber])
-        val mediaSource = progressiveMediaSource
+        val mediaSource = progressiveMediaSourceFactory
             .createMediaSource(uri)
         player.playWhenReady = true
         player.prepare(mediaSource, true, false)
@@ -62,20 +62,27 @@ class MainViewModel @Inject constructor(
     }
 
     fun nextSong() {
-        if (songNumber == 2) songNumber = 0
+        if (songNumber == uris.size-1) songNumber = 0
         else songNumber++
 
         setupPlayer(songNumber)
     }
 
     fun previousSong() {
-        if (songNumber == 0) songNumber = 2
+        if (songNumber == 0) songNumber = uris.size-1
         else songNumber--
 
         setupPlayer(songNumber)
     }
 
-    fun startCountDownTimer(interval: Long) {
+     fun toggleSleepMode(){
+        if (!isSleepMode.value!!)
+            startCountDownTimer(30000)
+        else
+            stopCountDownTimer()
+    }
+
+    private fun startCountDownTimer(interval: Long) {
         _isSleepMode.value = true
         countDownTimer = object : CountDownTimer(interval, 1000) {
 
@@ -91,7 +98,7 @@ class MainViewModel @Inject constructor(
         }.start()
     }
 
-    fun stopCountDownTimer() {
+    private fun stopCountDownTimer() {
         _isSleepMode.value = false
         countDownTimer?.cancel()
     }
@@ -99,6 +106,8 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         handler?.removeCallbacks(runnable!!)
+        handler = null
+        runnable = null
         if (countDownTimer != null) {
             countDownTimer?.cancel()
         }

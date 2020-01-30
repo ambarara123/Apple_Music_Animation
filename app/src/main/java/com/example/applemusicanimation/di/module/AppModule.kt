@@ -32,7 +32,7 @@ class AppModule {
     }
 
     @Provides
-    fun provideMediaSource(
+    fun provideMediaSourceFactory(
         dataSourceFactory: DataSource.Factory
     ): ProgressiveMediaSource.Factory {
         return ProgressiveMediaSource.Factory(dataSourceFactory)
