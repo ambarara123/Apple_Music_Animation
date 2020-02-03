@@ -62,27 +62,32 @@ class MainViewModel @Inject constructor(
     }
 
     fun nextSong() {
-        if (songNumber == uris.size-1) songNumber = 0
+        if (songNumber == uris.size - 1) songNumber = 0
         else songNumber++
 
         setupPlayer(songNumber)
     }
 
     fun previousSong() {
-        if (songNumber == 0) songNumber = uris.size-1
+        if (songNumber == 0) songNumber = uris.size - 1
         else songNumber--
 
         setupPlayer(songNumber)
     }
 
-     fun toggleSleepMode(){
+    fun toggleSleepMode() {
         if (!isSleepMode.value!!)
-            startCountDownTimer(30000)
+            startCountDownTimer()
         else
             stopCountDownTimer()
     }
 
-    private fun startCountDownTimer(interval: Long) {
+    fun seekToPosition(position: Int){
+        val newPosition = (player.duration*position)/100
+        player.seekTo(newPosition)
+    }
+
+    private fun startCountDownTimer(interval: Long= 30000) {
         _isSleepMode.value = true
         countDownTimer = object : CountDownTimer(interval, 1000) {
 

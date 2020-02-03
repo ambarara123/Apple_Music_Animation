@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ImageButton
+import android.widget.SeekBar
 import androidx.lifecycle.Observer
 import com.example.applemusicanimation.R
 import com.example.applemusicanimation.databinding.ActivityMainBinding
 import com.example.applemusicanimation.ui.base.BaseActivity
 import timber.log.Timber
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),SeekBar.OnSeekBarChangeListener {
 
 
     override fun getLayoutId(): Int = R.layout.activity_main
@@ -51,6 +52,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             pauseButton.setOnClickListener { viewModel.playPauseToggle() }
 
             sleepButton.setOnClickListener { viewModel.toggleSleepMode() }
+
+            seekBar.setOnSeekBarChangeListener(this@MainActivity)
         }
     }
 
@@ -63,5 +66,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             setBackgroundResource(
                 R.drawable.ic_timer_black_24dp
             )
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        if (fromUser)
+            viewModel.seekToPosition(progress)
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
     }
 }
